@@ -7,15 +7,15 @@ def inicio():
     return render_template("respawn.html")
 
 @app.route("/menu")
-def sobre():
+def menu():
     return render_template("menu.html")
 
 @app.route("/skins")
-def sobre():
+def skins():
     return render_template("skins.html")
 
 @app.route("/mina")
-def sobre():
+def mina():
     return render_template("mina.html")
 
 
