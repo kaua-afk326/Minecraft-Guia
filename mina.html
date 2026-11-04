@@ -1,0 +1,115 @@
+<html>
+<head>
+        <title>Minecraft - Mina</title>
+</head>
+
+<body>
+
+    <div class="caixa-texto">
+            <nav style="text-align: center;">
+                    <a href="respawn.html">Respawn</a>---
+                    <a href="mina.html">Minerar</a>---
+                    <a href="skins.html">Skins</a>---
+                    <a href="menu.html">Menu</a>
+                    <br>
+            </nav>
+        <h1>⛏️ Minha Mina</h1> 
+        <h2> 💎 Minérios encontrados: <span id="contador">0</span> </h2> 
+        <div class="mina"> 
+            <div class="bloco" onclick="minerar(this)">🪨</div> 
+            <div class="bloco" onclick="minerar(this)">🪨</div> 
+            <div class="bloco" onclick="minerar(this)">🪨</div> 
+            <div class="bloco" onclick="minerar(this)">🪨</div> 
+            <div class="bloco" onclick="minerar(this)">🪨</div> 
+            <div class="bloco" onclick="minerar(this)">🪨</div> 
+            <div class="bloco" onclick="minerar(this)">🪨</div> 
+            <div class="bloco" onclick="minerar(this)">🪨</div> 
+            <div class="bloco" onclick="minerar(this)">🪨</div> 
+            <div class="bloco" onclick="minerar(this)">🪨</div> 
+            <div class="bloco" onclick="minerar(this)">🪨</div> 
+            <div class="bloco" onclick="minerar(this)">🪨</div> 
+            <div class="bloco" onclick="minerar(this)">🪨</div> 
+            <div class="bloco" onclick="minerar(this)">🪨</div> 
+            <div class="bloco" onclick="minerar(this)">🪨</div> 
+        </div> 
+        <script> 
+        let contador = 0; 
+        function minerar(bloco) { 
+            if (bloco.classList.contains("quebrado")) { 
+                return; } if (bloco.innerHTML == "💎") 
+            {
+            contador++; 
+            document.getElementById("contador").innerHTML = contador; 
+            alert("💎 Você encontrou um diamante!"); 
+            } 
+            else { alert("🪨 Você encontrou pedra!"); 
+            } 
+            bloco.innerHTML = "💥"; 
+            bloco.classList.add("quebrado"); 
+            } 
+        </script>
+        <style>
+            .mina { 
+            width: 400px; 
+            margin: 30px auto; 
+            display: grid; 
+            grid-template-columns: repeat(5, 1fr); 
+            gap: 4px; 
+        } 
+        .bloco { 
+            height: 70px; 
+            background: #777; 
+            border: 3px solid #444; 
+            cursor: pointer; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            font-size: 30px; 
+        } 
+        .bloco:hover { 
+            transform: scale(1.05); 
+        } 
+        .quebrado { 
+            background: #222; cursor: default; 
+        }
+        body {
+            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGykqAVf3mPHOrY1zUc0eYQyTel7Ser1uvVSE_oVxhnQ&s=10');
+            
+            background-repeat: no-repeat;  
+            
+            background-position: top; 
+            
+            background-size: cover;
+
+            height: 100vh; 
+
+            width: 100vw;
+            
+            margin: 0; 
+
+            display: flex;
+
+            justify-content: center;
+            align-content: center;
+            align-items: center;
+
+
+        }
+        .caixa-texto {
+            /* O segredo está aqui: o último número (0.6) define a opacidade do fundo (vai de 0 a 1) */
+            background-color: rgba(0, 0, 0, 0.6); /* Fundo preto com 60% de opacidade */
+            
+            color: white; /* Cor do texto (permanece 100% visível) */
+            padding: 20px; /* Espaço entre o texto e a borda da caixa */
+            border-radius: 8px; /* Cantos arredondados (opcional) */
+            height: 70vh;
+            width: 70vw;
+            justify-content: center;
+        }
+        nav {
+            align-self: center;
+            justify-content: center;
+            background-color: black;
+            text-decoration: white;        }
+        </style>
+</body>
