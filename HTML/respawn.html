@@ -1,43 +1,9 @@
-<html>
-    <head>
-        <title>Minecraft - Guia</title>
-    </head>
-
-    <body>
-
-        <div class="caixa-texto">
-            <nav style="text-align: center;">
-                    <a href="/respawn">Respawn</a>---
-                    <a href="/mina">Minerar</a>---
-                    <a href="/skins">Skins</a>---
-                    <a href="/menu">Menu</a>
-                    <br>
-            </nav>
-            <br>
-            <h1><strong>Respawn</strong></h1>
-                <p>O seu primeiro dia no Minecraft é uma corrida contra o relógio.
-                Assim que você aparece no mundo (spawn), o seu objetivo principal é se preparar para a noite,
-                que é quando os monstros aparecem. Siga estes passos simples:</p><p>1.
-                Colete Madeira: Vá direto até a árvore mais próxima e segure o botão de ataque nos troncos para quebrá-los com as mãos vazias.
-                Pegue cerca de 4 a 6 blocos de madeira bruta.</p><p>2.
-                Crie suas Ferramentas: Abra o seu inventário e transforme os troncos em tábuas de madeira.
-                Use essas tábuas para criar uma Bancada de Trabalho (Crafting Table).
-                Com ela, você poderá fazer seus primeiros gravetos e uma Picareta de Madeira.</p><p>3.
-                Minere Pedra e Carvão: Use a picareta de madeira para quebrar blocos de pedra (pedregulho) e carvão,
-                que geralmente ficam expostos em montanhas ou pequenas cavernas superficiais.
-                Melhore suas ferramentas criando uma picareta e uma espada de pedra.</p><p>4. Procure por Ovelhas:
-                Se encontrar ovelhas, derrote três delas para conseguir lã.
-                Junte a lã com tábuas de madeira na bancada para fazer uma Cama.
-                Dormir na cama pula a noite perigosa e salva o seu novo ponto de renascimento.</p><p>5.
-                Faça um Abrigo e Tochas: Antes do sol se pôr, cave um pequeno abrigo na terra/pedra ou construa uma cabana simples.
-                Use o carvão e gravetos para fazer Tochas e iluminar o lado de dentro, impedindo que monstros nasçam do seu lado.</p>
-                <p>Com um teto sobre a cabeça, uma cama para dormir e ferramentas básicas,
-                você sobreviveu à primeira noite e está pronto para explorar, plantar e minerar mais fundo</p>
-        </div>
-        
-    </body>
-        <style>
-        
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Minecraft - Guia de Respawn</title>
+    <style>
         body {
             background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGykqAVf3mPHOrY1zUc0eYQyTel7Ser1uvVSE_oVxhnQ&s=10');
             background-repeat: no-repeat;  
@@ -48,26 +14,183 @@
             margin: 0; 
             display: flex;
             justify-content: center;
-            align-content: center;
             align-items: center;
-
-
+            transition: 0.5s;
         }
+
+        /* Camada escura de noite */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(10, 15, 45, 0);
+            pointer-events: none;
+            transition: background 0.5s ease;
+            z-index: 1;
+        }
+
+        body.noite::after {
+            background: rgba(10, 15, 45, 0.65);
+        }
+
         .caixa-texto {
-            /* O segredo está aqui: o último número (0.6) define a opacidade do fundo (vai de 0 a 1) */
-            background-color: rgba(0, 0, 0, 0.6); /* Fundo preto com 60% de opacidade */
-            
-            color: white; /* Cor do texto (permanece 100% visível) */
-            padding: 20px; /* Espaço entre o texto e a borda da caixa */
-            border-radius: 8px; /* Cantos arredondados (opcional) */
-            height: 70vh;
-            width: 70vw;
-            justify-content: center;
+            background-color: rgba(0, 0, 0, 0.8); 
+            color: white; 
+            padding: 30px; 
+            border-radius: 12px; 
+            height: 80vh;
+            width: 75vw;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto; /* Cria barra de rolagem se o texto for longo */
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.5);
         }
+
+        /* Estilização da Barra de Navegação com Ícones */
         nav {
-            align-self: center;
+            display: flex;
             justify-content: center;
-            background-color: black;
-            text-decoration: white;        }
+            gap: 20px;
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        nav a {
+            color: #ddd;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: 0.2s;
+        }
+
+        nav a:hover {
+            color: #fff;
+            transform: scale(1.08);
+        }
+
+        /* Estilo dos Passos do Guia */
+        .passo {
+            background: rgba(255, 255, 255, 0.07);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            border-left: 4px solid #4CAF50; /* Detalhe verde estilo Minecraft */
+        }
+
+        .passo h3 {
+            margin-top: 0;
+            color: #a3e4d7;
+        }
+
+        h1 {
+            text-align: center;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        p.intro {
+            font-size: 16px;
+            line-height: 1.5;
+            color: #ccc;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        button {
+            padding: 10px 20px; 
+            border: none; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            font-size: 16px; 
+            font-weight: bold;
+            background-color: #333;
+            color: white;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+
+        .topo-controles {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
     </style>
+</head>
+<body id="corpo">
+
+    <div class="caixa-texto">
+        <!-- Navegação com ícones intuitivos -->
+        <nav>
+            <a href="/">🛏️ Respawn</a>
+            <a href="/mina">⛏️ Minerar</a>
+            <a href="/skins">👕 Skins</a>
+            <a href="/menu">🏠 Menu</a>
+        </nav>
+
+        <div class="topo-controles">
+            <span>📖 Guia de Sobrevivência</span>
+            <button id="botao-horario" onclick="mudarHorario()"> 🌙 Noite </button>
+        </div>
+
+        <h1>Primeiro Dia no Minecraft</h1>
+        <p class="intro">O seu primeiro dia no Minecraft é uma corrida contra o relógio. Assim que você aparece no mundo, seu objetivo principal é se preparar para a noite, que é quando os monstros aparecem. Siga estes passos:</p>
+
+        <!-- Passos organizados em caixas bonitas -->
+        <div class="passo">
+            <h3>1. 🪵 Colete Madeira</h3>
+            <p>Vá direto até a árvore mais próxima e segure o botão de ataque nos troncos para quebrá-los. Pegue cerca de 4 a 6 blocos de madeira bruta.</p>
+        </div>
+
+        <div class="passo">
+            <h3>2. 🪓 Crie suas Ferramentas</h3>
+            <p>Abra seu inventário e transforme os troncos em tábuas. Crie uma Bancada de Trabalho (Crafting Table) para fazer gravetos e sua primeira Picareta de Madeira.</p>
+        </div>
+
+        <div class="passo">
+            <h3>3. ⛏️ Minere Pedra e Carvão</h3>
+            <p>Use a picareta de madeira para quebrar blocos de pedra e carvão encontrados em montanhas ou cavernas. Melhore seu equipamento criando uma picareta e espada de pedra.</p>
+        </div>
+
+        <div class="passo">
+            <h3>4. 🐑 Procure Ovelhas</h3>
+            <p>Encontre três ovelhas para conseguir lã. Junte a lã com tábuas na bancada para fazer uma Cama. Dormir pula a noite perigosa e define seu ponto de renascimento.</p>
+        </div>
+
+        <div class="passo">
+            <h3>5. 🏠 Faça um Abrigo e Tochas</h3>
+            <p>Antes do sol se pôr, faça um abrigo simples de terra/pedra. Use carvão e gravetos para criar Tochas e iluminar o interior, impedindo o nascimento de monstros.</p>
+        </div>
+
+        <p style="text-align: center; margin-top: 20px; font-weight: bold; color: #a9dfbf;">
+            ✨ Com teto, cama e ferramentas, você sobreviveu à primeira noite e está pronto para explorar!
+        </p>
+    </div>
+
+    <script>
+        function mudarHorario() { 
+            document.body.classList.toggle("noite"); 
+            let botao = document.getElementById("botao-horario"); 
+            
+            if (document.body.classList.contains("noite")) { 
+                botao.innerHTML = "☀️ Dia"; 
+            } else { 
+                botao.innerHTML = "🌙 Noite"; 
+            } 
+        } 
+    </script>
+</body>
 </html>
