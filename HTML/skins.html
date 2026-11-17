@@ -1,33 +1,10 @@
-<html>
+
+    <!DOCTYPE html>
+<html lang="pt-BR">
 <head>
-        <title>Minecraft - Skins</title>
-</head>
-<body>
-    <div class="caixa-texto">
-            <nav style="text-align: top ;">
-                    <a href="/respawn">Respawn</a>---
-                    <a href="/mina">Minerar</a>---
-                    <a href="/skins">Skins</a>---
-                    <a href="/menu">Menu</a>
-                    <br>
-            </nav>
-        <form action="/cadastro" method="post">
-            <h1>Cadastro</h1><br>
-            <label for="nome">Nome:</label>
-            <input type="text" id="bome" name="nome">
-            <br><br>
-            <label for="email">E-mail:</label>
-            <input type="email" id="email" name="email">
-            <br><br>
-            <label for="senha">Senha:</label>
-            <input type="password" id="senha" name="senha">
-            <br><br>
-            <button type="submit">Enviar</button>
-        </form>
-    </div>
-</body>
-    </script>
-        <style>
+    <meta charset="UTF-8">
+    <title>Minecraft - Cadastro</title>
+    <style>
         body {
             background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGykqAVf3mPHOrY1zUc0eYQyTel7Ser1uvVSE_oVxhnQ&s=10');
             background-repeat: no-repeat;  
@@ -38,48 +15,381 @@
             margin: 0; 
             display: flex;
             justify-content: center;
-            align-content: center;
             align-items: center;
+            font-family: 'Courier New', Courier, monospace;
             transition: 0.5s;
+        }
 
+        /* Camada escura para o modo Noite */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(10, 15, 45, 0);
+            pointer-events: none;
+            transition: background 0.5s ease;
+            z-index: 1;
+        }
 
+        body.noite::after {
+            background: rgba(10, 15, 45, 0.65);
         }
-        
-        .clock { 
-            text-align: center;
-        } 
-        h1 { 
-            color: white;
-        } 
-        button { 
-            padding: 15px 25px; 
-            font-size: 18px; 
-            cursor: pointer; 
-            border: none; 
-            border-radius: 8px; 
-        } 
-        .noite { 
-            background: #10152e; 
-        }
-        div {
-            justify-content: center;
-            align-content: center;
-            align-items: center;
-        }
+
+        /* Caixa principal estilo inventário/bloco do Minecraft */
         .caixa-texto {
-            /* O segredo está aqui: o último número (0.6) define a opacidade do fundo (vai de 0 a 1) */
-            background-color: rgba(0, 0, 0, 0.6); /* Fundo preto com 60% de opacidade */
-            color: white; /* Cor do texto (permanece 100% visível) */
-            padding: 20px; /* Espaço entre o texto e a borda da caixa */
-            border-radius: 9px; /* Cantos arredondados (opcional) */
-            height: 60vh;
-            width: 35vw;
-            justify-content: center;
+            background-color: rgba(25, 25, 25, 0.88);
+            border: 4px solid #555;
+            box-shadow: inset 0 0 0 4px #222, 0 10px 25px rgba(0,0,0,0.7);
+            color: white; 
+            padding: 25px; 
+            border-radius: 6px; 
+            width: 420px;
+            max-width: 90vw;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
         }
+
+        /* Navegação padronizada */
         nav {
-            align-self: top;
+            display: flex;
             justify-content: center;
-            background-color: black;   
+            gap: 15px;
+            background-color: #111;
+            border: 2px solid #444;
+            padding: 10px 15px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            width: 100%;
+            box-sizing: border-box;
         }
-        </style>
+
+        nav a {
+            color: #ddd;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        nav a:hover {
+            color: #55ff55;
+            transform: scale(1.05);
+        }
+
+        .topo-controles {
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .btn-noite {
+            padding: 6px 12px;
+            font-size: 13px;
+            background: #333;
+            color: white;
+            border: 2px solid #666;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: bold;
+        }
+
+        /* =========================================
+           PAPERDOLL DO STEVE (CSS PIXEL ART)
+           ========================================= */
+        .palco-steve {
+            height: 135px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 10px 0;
+        }
+
+        .steve {
+            position: relative;
+            width: 64px;
+            height: 120px;
+            animation: respirar 2s infinite ease-in-out;
+        }
+
+        /* Cabeça */
+        .cabeca {
+            width: 32px;
+            height: 32px;
+            background-color: #b58d6b;
+            margin: 0 auto;
+            position: relative;
+            border-top: 8px solid #3b2618; /* Cabelo */
+            box-sizing: border-box;
+            transition: transform 0.2s;
+            z-index: 3;
+        }
+
+        /* Olhos */
+        .olho {
+            width: 8px;
+            height: 4px;
+            background: white;
+            position: absolute;
+            top: 10px;
+        }
+        .olho.esq { left: 4px; }
+        .olho.dir { right: 4px; }
+        .olho::after {
+            content: '';
+            width: 4px;
+            height: 4px;
+            background: #3b2d7a; /* Pupila azul/roxa do Steve */
+            position: absolute;
+            top: 0;
+        }
+        .olho.esq::after { right: 0; }
+        .olho.dir::after { left: 0; }
+
+        /* Nariz e Boca */
+        .nariz {
+            width: 8px;
+            height: 4px;
+            background: #966d4e;
+            position: absolute;
+            top: 14px;
+            left: 12px;
+        }
+        .boca {
+            width: 12px;
+            height: 4px;
+            background: #6b432b;
+            position: absolute;
+            bottom: 2px;
+            left: 10px;
+        }
+
+        /* Tronco (Camisa Ciano) */
+        .tronco {
+            width: 32px;
+            height: 44px;
+            background-color: #00aaaa;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Braços */
+        .braco {
+            width: 14px;
+            height: 44px;
+            background: linear-gradient(to bottom, #00aaaa 14px, #b58d6b 14px);
+            position: absolute;
+            top: 32px;
+            transform-origin: top center;
+            transition: transform 0.3s ease;
+            z-index: 4;
+        }
+        .braco.esq { left: 1px; }
+        .braco.dir { right: 1px; }
+
+        /* Pernas (Calça Azul) */
+        .pernas {
+            display: flex;
+            justify-content: center;
+            gap: 2px;
+        }
+        .perna {
+            width: 15px;
+            height: 42px;
+            background: linear-gradient(to bottom, #3b3b98 34px, #555 34px);
+        }
+
+        /* Animações de Estado do Steve */
+        @keyframes respirar {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-2px); }
+        }
+
+        @keyframes digitandoBraco {
+            0%, 100% { transform: rotate(-25deg); }
+            50% { transform: rotate(-45deg); }
+        }
+
+        /* Quando está digitando texto */
+        .steve.digitando .braco.dir {
+            animation: digitandoBraco 0.3s infinite ease-in-out;
+        }
+        .steve.digitando .cabeca {
+            transform: rotate(5deg);
+        }
+
+        /* Quando está digitando senha (tampa os olhos!) */
+        .steve.escondendo .braco.esq {
+            transform: rotate(-155deg) translateX(-4px);
+        }
+        .steve.escondendo .braco.dir {
+            transform: rotate(155deg) translateX(4px);
+        }
+
+        /* =========================================
+           ESTILO DO FORMULÁRIO (BOTÕES E INPUTS)
+           ========================================= */
+        form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 0 0 15px 0;
+            font-size: 24px;
+            text-shadow: 2px 2px #000;
+            color: #ffff55;
+        }
+
+        label {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #ccc;
+            text-shadow: 1px 1px #000;
+        }
+
+        input {
+            background-color: #000;
+            border: 3px solid #777;
+            color: #fff;
+            padding: 10px;
+            font-size: 16px;
+            font-family: inherit;
+            margin-bottom: 15px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #55ff55;
+        }
+
+        /* Botão clássico verde do Minecraft */
+        button[type="submit"] {
+            background-color: #3c8527;
+            color: white;
+            border: 3px solid #1e4d12;
+            box-shadow: inset 0 4px 0 #5bc236, inset 0 -4px 0 #2a631b;
+            padding: 12px;
+            font-size: 18px;
+            font-family: inherit;
+            font-weight: bold;
+            text-shadow: 2px 2px #1e4d12;
+            cursor: pointer;
+            margin-top: 5px;
+            transition: 0.1s;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #49a130;
+        }
+
+        button[type="submit"]:active {
+            transform: translateY(2px);
+        }
+    </style>
+</head>
+<body id="corpo">
+
+    <div class="caixa-texto">
+        <nav>
+            <a href="/">🛏️ Respawn</a>
+            <a href="/mina">⛏️ Minerar</a>
+            <a href="/skins">👕 Skins</a>
+            <a href="/menu">🏠 Menu</a>
+        </nav>
+
+        <div class="topo-controles">
+            <button id="botao-horario" class="btn-noite" onclick="mudarHorario()">🌙 Noite</button>
+        </div>
+
+        <!-- Paperdoll do Steve -->
+        <div class="palco-steve">
+            <div class="steve" id="steve">
+                <div class="cabeca">
+                    <div class="olho esq"></div>
+                    <div class="olho dir"></div>
+                    <div class="nariz"></div>
+                    <div class="boca"></div>
+                </div>
+                <div class="braco esq"></div>
+                <div class="tronco"></div>
+                <div class="braco dir"></div>
+                <div class="pernas">
+                    <div class="perna"></div>
+                    <div class="perna"></div>
+                </div>
+            </div>
+        </div>
+
+        <form action="/cadastro" method="post">
+            <h1>Criar Conta</h1>
+
+            <label for="nome">Nickname (Nome):</label>
+            <input type="text" id="nome" name="nome" placeholder="Ex: Steve_BR" required>
+
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" name="email" placeholder="steve@minecraft.net" required>
+
+            <label for="senha">Senha Secreta:</label>
+            <input type="password" id="senha" name="senha" placeholder="••••••••" required>
+
+            <button type="submit">Entrar no Mundo</button>
+        </form>
+    </div>
+
+    <script>
+        const steve = document.getElementById("steve");
+        const inputNome = document.getElementById("nome");
+        const inputEmail = document.getElementById("email");
+        const inputSenha = document.getElementById("senha");
+
+        // Animação ao focar/digitar no Nome ou E-mail
+        function ativarDigitando() {
+            steve.classList.remove("escondendo");
+            steve.classList.add("digitando");
+        }
+
+        // Animação ao focar na Senha (tampa os olhos)
+        function ativarEscondendo() {
+            steve.classList.remove("digitando");
+            steve.classList.add("escondendo");
+        }
+
+        // Volta ao normal ao sair dos campos
+        function voltarNormal() {
+            steve.classList.remove("digitando");
+            steve.classList.remove("escondendo");
+        }
+
+        inputNome.addEventListener("focus", ativarDigitando);
+        inputNome.addEventListener("blur", voltarNormal);
+
+        inputEmail.addEventListener("focus", ativarDigitando);
+        inputEmail.addEventListener("blur", voltarNormal);
+
+        inputSenha.addEventListener("focus", ativarEscondendo);
+        inputSenha.addEventListener("blur", voltarNormal);
+
+        // Modo Dia e Noite
+        function mudarHorario() { 
+            document.body.classList.toggle("noite"); 
+            let botao = document.getElementById("botao-horario"); 
+            
+            if (document.body.classList.contains("noite")) { 
+                botao.innerHTML = "☀️ Dia"; 
+            } else { 
+                botao.innerHTML = "🌙 Noite"; 
+            } 
+        }
+    </script>
+</body>
 </html>
