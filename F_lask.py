@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 
 app = Flask(__name__, template_folder="HTML")
 
-@app.route("/respawn")
+@app.route("/")
 def inicio():
     return render_template("respawn.html")
 
